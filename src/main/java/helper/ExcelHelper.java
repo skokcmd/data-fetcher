@@ -3,7 +3,9 @@ package helper;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -25,7 +27,7 @@ public class ExcelHelper {
 	}
 
 	/**
-	 * Methods to check if string contains only numbers
+	 * Method to check if string contains only numbers
 	 *
 	 * @param str
 	 *            string to be checked
@@ -66,7 +68,7 @@ public class ExcelHelper {
 	 *            number to check
 	 * @return whether num is prime
 	 */
-	private boolean isPrimeNumber(double num) {
+	private boolean isNumberPrime(double num) {
 		for (int i = 2; i <= num / 2; ++i) {
 			// condition for non-prime number
 			if (num % i == 0) {
@@ -105,7 +107,7 @@ public class ExcelHelper {
 		// skips the header
 		stringValues.stream().skip(1).forEach(value -> {
 			// parse number string to int
-			// if values contains decimal -> parsedValue = -1
+			// if value contains decimal -> parsedValue = -1 .. ignored
 			int parsedValue = stringToInt(value);
 			if (parsedValue > 0) {
 				numericValues.add(parsedValue);
@@ -115,16 +117,16 @@ public class ExcelHelper {
 	}
 
 	/**
-	 * Gets prime numbers from a list of integers
+	 * Gets prime numbers from a list of integers; Using set to ignore duplicates
 	 * 
 	 * @param values
 	 *            list of integers
 	 * @return new list of prime values
 	 */
-	public List<Integer> getPrimeNumbersFromList(List<Integer> values) {
-		List<Integer> primeNumbers = new ArrayList<>();
+	public Set<Integer> getPrimeNumbersFromList(List<Integer> values) {
+		Set<Integer> primeNumbers = new HashSet<>();
 		values.forEach(num -> {
-			if (isPrimeNumber(num)) {
+			if (isNumberPrime(num)) {
 				primeNumbers.add(num);
 			}
 		});
