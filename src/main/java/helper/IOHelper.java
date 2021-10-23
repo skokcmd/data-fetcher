@@ -1,6 +1,8 @@
 package helper;
 
 import java.io.*;
+import java.util.List;
+import java.util.Set;
 
 public class IOHelper {
 
@@ -10,6 +12,13 @@ public class IOHelper {
 		reader = new BufferedReader(new InputStreamReader(System.in));
 	}
 
+	/**
+	 * Method to read line from the user input using BufferedReader
+	 * 
+	 * @param message
+	 *            string to display to the user before the input
+	 * @return String that user has entered
+	 */
 	public static String readLine(String message) {
 		System.out.print(message);
 		try {
@@ -43,7 +52,14 @@ public class IOHelper {
 	 * @param list
 	 *            any list
 	 */
-	public static void printList(Iterable<?> list) {
+	public static void printList(List<?> list) {
 		list.forEach(System.out::println);
+	}
+
+	/**
+	 * Generic method to print set
+	 */
+	public static void printSet(Set<?> set) {
+		set.forEach(System.out::println);
 	}
 }
