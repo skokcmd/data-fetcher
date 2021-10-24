@@ -1,7 +1,6 @@
 package helper;
 
 import java.io.*;
-import java.util.List;
 import java.util.Set;
 
 public class IOHelper {
@@ -47,17 +46,10 @@ public class IOHelper {
 	}
 
 	/**
-	 * Generic method to print out a list
-	 * 
-	 * @param list
-	 *            any list
-	 */
-	public static void printList(List<?> list) {
-		list.forEach(System.out::println);
-	}
-
-	/**
 	 * Generic method to print set
+	 * 
+	 * @param set
+	 *            Set that will be printed
 	 */
 	public static void printSet(Set<?> set) {
 		set.forEach(System.out::println);
