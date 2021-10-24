@@ -12,12 +12,12 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
-public class ExcelHelper {
+public class Excel {
 
 	private Workbook wb;
 	private Sheet sheet;
 
-	public ExcelHelper(FileInputStream fileInputStream) {
+	public Excel(FileInputStream fileInputStream) {
 		try {
 			this.wb = new XSSFWorkbook(fileInputStream);
 			this.sheet = wb.getSheetAt(0);

@@ -2,7 +2,7 @@ import java.io.FileInputStream;
 import java.util.List;
 import java.util.Set;
 
-import helper.ExcelHelper;
+import helper.Excel;
 import helper.IOHelper;
 
 public class App {
@@ -16,12 +16,12 @@ public class App {
 		FileInputStream inputStream = IOHelper.getExcelInputStreamByPath(stringPath);
 
 		if (inputStream != null) {
-			ExcelHelper excelHelper = new ExcelHelper(inputStream);
+			Excel excel = new Excel(inputStream);
 			// parses string values to numeric
-			List<Integer> numericSecondColValues = excelHelper
-					.stringListToListOfIntegers(excelHelper.getAllValuesWithoutHeaderFromColumnAtIndex(1));
+			List<Integer> numericSecondColValues = excel
+					.stringListToListOfIntegers(excel.getAllValuesWithoutHeaderFromColumnAtIndex(1));
 
-			Set<Integer> primeNumbers = excelHelper.getPrimeNumbersFromIntegers(numericSecondColValues);
+			Set<Integer> primeNumbers = excel.getPrimeNumbersFromIntegers(numericSecondColValues);
 			IOHelper.printSet(primeNumbers);
 		}
 		// D:\vzorek_dat.xlsx

@@ -7,17 +7,17 @@ import java.util.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import helper.ExcelHelper;
+import helper.Excel;
 
 public class ExcelTest {
 	FileInputStream inputStream;
-	ExcelHelper excelHelper;
+	Excel excel;
 
 	@BeforeEach
 	void setUp() {
 		try {
 			inputStream = new FileInputStream("src/test/resources/vzorek_dat.xlsx");
-			excelHelper = new ExcelHelper(inputStream);
+			excel = new Excel(inputStream);
 		} catch (FileNotFoundException ex) {
 			ex.printStackTrace();
 		}
@@ -25,20 +25,20 @@ public class ExcelTest {
 
 	@Test
 	void containsOnlyDigits() {
-		assertTrue(excelHelper.containsOnlyDigits("123"));
-		assertFalse(excelHelper.containsOnlyDigits("asfs12"));
+		assertTrue(excel.containsOnlyDigits("123"));
+		assertFalse(excel.containsOnlyDigits("asfs12"));
 	}
 
 	@Test
 	void stringToInt() {
-		assertEquals(123, excelHelper.stringToInt("123"));
-		assertEquals(-1, excelHelper.stringToInt("123abc"));
+		assertEquals(123, excel.stringToInt("123"));
+		assertEquals(-1, excel.stringToInt("123abc"));
 	}
 
 	@Test
 	void isNumberPrime() {
-		assertTrue(excelHelper.isNumberPrime(7));
-		assertFalse(excelHelper.isNumberPrime(9));
+		assertTrue(excel.isNumberPrime(7));
+		assertFalse(excel.isNumberPrime(9));
 	}
 
 	@Test
@@ -46,7 +46,7 @@ public class ExcelTest {
 		List<Integer> nums = Arrays.asList(1, 2, 3);
 		List<Integer> expected = Arrays.asList(2, 3);
 
-		assertEquals(expected, excelHelper.removeFirstValueOfList(nums));
+		assertEquals(expected, excel.removeFirstValueOfList(nums));
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class ExcelTest {
 		for (int i = 0; i <= 10; i++) {
 			values.add(i);
 		}
-		Set<Integer> primeValues = excelHelper.getPrimeNumbersFromIntegers(values);
+		Set<Integer> primeValues = excel.getPrimeNumbersFromIntegers(values);
 		assertEquals(expected, primeValues);
 	}
 
@@ -65,14 +65,14 @@ public class ExcelTest {
 		List<String> strings = Arrays.asList("123", "21344");
 		List<Integer> expected = Arrays.asList(123, 21344);
 
-		assertEquals(expected, excelHelper.stringListToListOfIntegers(strings));
+		assertEquals(expected, excel.stringListToListOfIntegers(strings));
 	}
 
 	@Test
 	void getAllValuesWithoutHeaderFromColumnAtIndex() {
 		List<String> expected = Arrays.asList("5645641", "5645657", "5799555", "15619", "5221652", "1234187", "9584",
 				"211", "7.0", "9785", "65132114", "9788677", "23311", "54881", "21448", "28", "564564556", "safsfd");
-		assertEquals(expected, excelHelper.getAllValuesWithoutHeaderFromColumnAtIndex(1));
+		assertEquals(expected, excel.getAllValuesWithoutHeaderFromColumnAtIndex(1));
 	}
 
 }
