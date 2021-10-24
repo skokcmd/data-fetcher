@@ -6,7 +6,7 @@ import java.util.Set;
 
 public class IOHelper {
 
-	private static BufferedReader reader;
+	private static final BufferedReader reader;
 
 	static {
 		reader = new BufferedReader(new InputStreamReader(System.in));
@@ -22,7 +22,7 @@ public class IOHelper {
 	public static String readLine(String message) {
 		System.out.print(message);
 		try {
-			return reader.readLine();
+			return reader.readLine().trim();
 		} catch (IOException ex) {
 			System.out.println("Can't read the text");
 		}
