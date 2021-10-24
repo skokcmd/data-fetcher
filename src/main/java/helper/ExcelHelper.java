@@ -33,13 +33,8 @@ public class ExcelHelper {
 	 *            string to be checked
 	 * @return boolean
 	 */
-	private boolean containsOnlyDigits(String str) {
-		int len = str.length();
-		for (int i = 0; i < len; i++) {
-			if (str.charAt(i) >= '0' && str.charAt(i) <= '9')
-				return true;
-		}
-		return false;
+	public boolean containsOnlyDigits(String str) {
+		return str.matches("[0-9]+");
 	}
 
 	/**
@@ -49,11 +44,10 @@ public class ExcelHelper {
 	 *            string for parsing
 	 * @return parsed int || -1
 	 */
-	private int stringToInt(String s) {
+	public int stringToInt(String s) {
 		if (containsOnlyDigits(s)) {
 			double d = Double.parseDouble(s);
-			// checks if double contains decimal point other decimal point than 0
-			// -> 7.0 is valid
+			// checks if double contains decimal point
 			if (d % 1 == 0) {
 				return (int) d;
 			}
@@ -68,7 +62,7 @@ public class ExcelHelper {
 	 *            number to check
 	 * @return whether num is prime
 	 */
-	private boolean isNumberPrime(double num) {
+	public boolean isNumberPrime(double num) {
 		for (int i = 2; i <= num / 2; ++i) {
 			// condition for non-prime number
 			if (num % i == 0) {
@@ -79,19 +73,33 @@ public class ExcelHelper {
 	}
 
 	/**
+	 * Method to remove header element from the list
+	 *
+	 * @param list
+	 *            values
+	 * @return new list without first value
+	 */
+	public <T> List<T> removeFirstValueOfList(List<T> list) {
+		List<T> newList = new ArrayList<>();
+		list.stream().skip(1).forEach(newList::add);
+		return newList;
+	}
+
+	/**
 	 * Gets a string list by the column index
 	 * 
 	 * @param index
 	 *            index of the column
-	 * @return list of string values at given column
+	 * @return list of string values at given column without the header
 	 */
-	public List<String> getAllRowsOfColumnAtIndex(int index) {
+	public List<String> getAllValuesWithoutHeaderFromColumnAtIndex(int index) {
 		List<String> allStringValues = new ArrayList<>();
 		this.sheet.forEach(row -> {
 			Cell cell = row.getCell(index);
 			allStringValues.add(cell.getStringCellValue());
 		});
-		return allStringValues;
+		// returns list without header
+		return removeFirstValueOfList(allStringValues);
 	}
 
 	/**
@@ -104,10 +112,9 @@ public class ExcelHelper {
 	 */
 	public List<Integer> stringListToListOfIntegers(List<String> stringValues) {
 		List<Integer> numericValues = new ArrayList<>();
-		// skips the header
-		stringValues.stream().skip(1).forEach(value -> {
+		stringValues.forEach(value -> {
 			// parse number string to int
-			// if value contains decimal -> parsedValue = -1 .. ignored
+			// if value contains decimal || other characters -> parsedValue = -1 -> invalid
 			int parsedValue = stringToInt(value);
 			if (parsedValue > 0) {
 				numericValues.add(parsedValue);
@@ -123,7 +130,7 @@ public class ExcelHelper {
 	 *            list of integers
 	 * @return new list of prime values
 	 */
-	public Set<Integer> getPrimeNumbersFromList(List<Integer> values) {
+	public Set<Integer> getPrimeNumbersFromIntegers(List<Integer> values) {
 		Set<Integer> primeNumbers = new HashSet<>();
 		values.forEach(num -> {
 			if (isNumberPrime(num)) {
