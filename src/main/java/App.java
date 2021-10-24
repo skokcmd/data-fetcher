@@ -1,5 +1,6 @@
 import java.io.FileInputStream;
 import java.util.List;
+import java.util.Set;
 
 import helper.ExcelHelper;
 import helper.IOHelper;
@@ -18,10 +19,10 @@ public class App {
 			ExcelHelper excelHelper = new ExcelHelper(inputStream);
 			// parses string values to numeric
 			List<Integer> numericSecondColValues = excelHelper
-					.stringListToListOfIntegers(excelHelper.getAllRowsOfColumnAtIndex(1));
+					.stringListToListOfIntegers(excelHelper.getAllValuesWithoutHeaderFromColumnAtIndex(1));
 
-			List<Integer> primeNumbers = excelHelper.getPrimeNumbersFromList(numericSecondColValues);
-			IOHelper.printList(primeNumbers);
+			Set<Integer> primeNumbers = excelHelper.getPrimeNumbersFromIntegers(numericSecondColValues);
+			IOHelper.printSet(primeNumbers);
 		}
 		// D:\vzorek_dat.xlsx
 	}
