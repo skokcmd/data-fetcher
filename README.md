@@ -1,5 +1,4 @@
-## Vypracované zadání
-K vypracování zadání jsem použil Javu 16, společně s knihovnou Apache POI, kterou jsem uvedl jako maven dependency. Celé zadání i s testy mi zabralo cca 3-4h.
+## Test data fetch
 - program přijímá jako jediný vstupní parametr cestu k souboru (např. D:\vzorek_dat.xlsx)
 - z .xlsx souboru jsou získávána data ze sloupce B, podle jeho indexu
 - funkce, která získává tyto data ignoruje všechna decimální čísla
